@@ -130,7 +130,7 @@ logo_label.pack(side=TOP)
 
 
 # Set the window size and make labels bold
-root.geometry("600x350")
+root.geometry("610x370")
 root.config(bg='#1877F2')
 bold_font = ("TkDefaultFont", 10, "bold")
 root.resizable(False,False)
@@ -165,5 +165,8 @@ browse_button.grid(row=3, column=2, padx=10, pady=5)
 
 run_button = tk.Button(frame, text="Run",font=("TkDefaultFont", 10, "bold"),fg='black',bg='light green',width=20, command=run)
 run_button.grid(row=4, columnspan=3, padx=10, pady=10)
+
+title_label = tk.Label(frame, text="By Abdul Wahab",bg="#1877F2",fg="white", font=("TkDefaultFont", 8, "bold"))
+title_label.grid(row=5,columnspan=3,sticky=E,pady=10)
 
 root.mainloop()
