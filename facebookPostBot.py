@@ -8,7 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
 import time
-import pyautogui
+from tkinter import *
 
 
 
@@ -26,17 +26,10 @@ def run():
     password1 = password_entry.get()
     caption1 = caption_entry.get()
     path = path_entry.get()
+    path1=path.replace('/','//')
+    print(path1)
 
 
-    # script_path = 'Selenium_script.py'
-
-    # with open(script_path, 'r') as file:
-    #  script_code = file.read()
-
-    # try:
-    #  exec(script_code)
-    # except Exception as e:
-    #  print(f"Error running {script_path}: {e}")
     chrome_options1 = Options()
     chrome_options1.add_argument("--disable-notifications")
     
@@ -113,14 +106,8 @@ def run():
 
             btnPost=WebDriverWait(driver,10).until(EC.element_to_be_clickable((By.XPATH,'''/html/body/div[4]/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div/div/div[3]/div[2]/div/div''')))
             btnPost.click()
-            time.sleep(30)
-                
-
-
-        # btnpost.send_keys(Keys.ENTER)
-
-
-
+            time.sleep(20)
+            
 
         except:
             print('there was an error uploading the picture')    
@@ -130,42 +117,53 @@ def run():
 
 
 
-    
+#GUI    
 
-# Create the main window
 root = tk.Tk()
-root.title("Facebook Selenium Automation")
+root.title("Facebook Bot")
+root.iconbitmap('C:\\Users\\zarwa\\Desktop\\currently working\\icon.ico')
 
-# Create labels and entry fields
-email_label = tk.Label(root, text="Email:")
-email_label.pack()
-email_entry = tk.Entry(root)
-email_entry.pack()
+photo=PhotoImage(file='C:\\Users\\zarwa\\Desktop\\currently working\\logo1.png')
 
-password_label = tk.Label(root, text="Password:")
-password_label.pack()
-password_entry = tk.Entry(root, show="*")  # Use 'show' to hide the password
-password_entry.pack()
-
-caption_label = tk.Label(root, text="Caption:")
-caption_label.pack()
-caption_entry = tk.Entry(root)
-caption_entry.pack()
-
-path_label = tk.Label(root, text="Image Path:")
-path_label.pack()
-path_entry = tk.Entry(root)
-path_entry.pack()
+logo_label=tk.Label(image=photo,background='#1877F2')
+logo_label.pack(side=TOP)
 
 
+# Set the window size and make labels bold
+root.geometry("600x350")
+root.config(bg='#1877F2')
+bold_font = ("TkDefaultFont", 10, "bold")
+root.resizable(False,False)
 
-browse_button = tk.Button(root, text="Browse",command=open_file_dialog)
-browse_button.pack()
+# Create a big label at the top
+title_label = tk.Label(root, text="FACEBOOK BOT",bg="black",fg="white", font=("TkDefaultFont", 14, "bold"))
+title_label.pack(pady=10)
 
-run_button = tk.Button(root, text="Run Selenium Script", command=run)
-run_button.pack()
+# Create a frame for better organization and fill the window
+frame = tk.Frame(root,bg='#1877F2', padx=20, pady=20)
+frame.pack(fill=tk.BOTH, expand=True)
+
+# Labels and entry fields with larger font
+tk.Label(frame, text="Email:", font=bold_font,relief=RAISED).grid(row=0, column=0, sticky="w",)
+email_entry = tk.Entry(frame, font=bold_font,width=50,bd=3)
+email_entry.grid(row=0, column=1, padx=10, pady=5, sticky="w")
+
+tk.Label(frame, text="Password:", font=bold_font,relief=RAISED).grid(row=1, column=0, sticky="w")
+password_entry = tk.Entry(frame, show="*", font=bold_font,width=50,bd=3)
+password_entry.grid(row=1, column=1, padx=10, pady=5, sticky="w")
+
+tk.Label(frame, text="Caption:", font=bold_font,relief=RAISED).grid(row=2, column=0, sticky="w")
+caption_entry = tk.Entry(frame, font=bold_font,width=50,bd=3)
+caption_entry.grid(row=2, column=1, padx=10, pady=5, sticky="w")
+
+tk.Label(frame, text="Image Path:", font=bold_font,relief=RAISED).grid(row=3, column=0, sticky="w")
+path_entry = tk.Entry(frame, font=bold_font,width=50,bd=3)
+path_entry.grid(row=3, column=1, padx=10, pady=5, sticky="w")
+
+browse_button = tk.Button(frame, text="Browse",bg='yellow',width=12,font=("TkDefaultFont", 10, "bold"), command=open_file_dialog)
+browse_button.grid(row=3, column=2, padx=10, pady=5)
+
+run_button = tk.Button(frame, text="Run",font=("TkDefaultFont", 10, "bold"),fg='black',bg='light green',width=20, command=run)
+run_button.grid(row=4, columnspan=3, padx=10, pady=10)
 
 root.mainloop()
-
-
-
